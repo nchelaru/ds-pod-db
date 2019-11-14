@@ -1,0 +1,100 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+library(RPostgres)
+library(dplyr)
+
+# Connect to my Heroku PostgreSQL database
+Sys.getenv('.Renviron')
+
+con <- dbConnect(
+  Postgres(),
+  dbname = "d2sjdih8tegcuc",
+  host = "ec2-184-72-238-22.compute-1.amazonaws.com",
+  port = '5432',
+  user = "xkktypszvisogc",
+  password = "35b7eb67cab6ea1750e5877d61c3415851d6f1ca9c5782ec0b6bf91ede8acbea",
+  sslmode = 'require'
+)
+
+uniques <- dbGetQuery(con, "SELECT * FROM podcasts")
+
+uniques <-
+  uniques[order(as.Date(uniques$ReleaseDate), decreasing = TRUE),]
+
+```
+
+```{r}
+df <- read.csv('/Users/nancy/Documents/GitHub/dash-tabs/freq_itemsets.csv', header=FALSE)
+
+
+```
+
+```{r}
+x <- data.frame(table(unlist(strsplit(
+  as.character(df$V1), ","
+))))
+
+
+x$Var1 <- gsub("\\[", "", x$Var1)
+x$Var1 <- gsub("\\]", "", x$Var1)
+x$Var1 <- gsub("'", "", x$Var1)
+
+df$V1 <- gsub("\\[", "", df$V1)
+df$V1 <- gsub("\\]", "", df$V1)
+df$V1 <- gsub("'", "", df$V1)
+
+df_list <- list()
+```
+
+
+```{r}
+for (item in x$Var1) {
+  filtered_df <- dplyr::filter(df, grepl(item, V1))
+  
+  filtered_count <-
+    data.frame(table(unlist(strsplit(
+      filtered_df$V1, ", "
+    ))))
+  
+  
+  filtered_count$Freq[is.na(filtered_count$Freq)] <- 0
+  
+  names(filtered_count)[2] <- item
+  
+  df_list[[item]] <- filtered_count
+  
+}
+```
+
+
+```{r}
+library(purrr)
+library(heatmaply)
+
+z <- df_list %>% reduce(full_join, by = "Var1")
+
+rownames(z) <- z$Var1
+
+z$Var1 <- NULL
+
+z[is.na(z)] <- 0
+
+
+heatmaply(
+  scale(z),
+  k_row = 3,
+  k_col = 3,
+  margins = c(0, 0, 30, 0)
+)
+
+```
+
+

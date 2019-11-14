@@ -1,0 +1,27 @@
+Package: shinyaudio
+Type: Package
+Title: Easy to implement audio functionality for Shiny Apps
+Version: 0.0.01
+Date: 2017-01-09
+Authors@R: person("Matt", "Cole", email = "mattcole1093@gmail.com",
+                  role = c("aut", "cre"))
+Maintainer: Matt Cole <mattcole1093@gmail.com>
+Description: More about what it does (maybe more than one line)
+Depends: shiny
+License: MIT
+LazyData: TRUE
+RoxygenNote: 5.0.1
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: shinyaudio
+RemoteUsername: mattkcole
+RemoteRef: master
+RemoteSha: da379566721631e713dea1176c43cf017f27b7d8
+GithubRepo: shinyaudio
+GithubUsername: mattkcole
+GithubRef: master
+GithubSHA1: da379566721631e713dea1176c43cf017f27b7d8
+NeedsCompilation: no
+Packaged: 2019-09-08 04:15:25 UTC; nancy
+Author: Matt Cole [aut, cre]
+Built: R 3.6.0; ; 2019-09-08 04:15:25 UTC; unix
