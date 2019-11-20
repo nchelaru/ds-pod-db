@@ -56,7 +56,7 @@ uniques <-
 
 ## Snippets
 iframe_raindrop <- HTML('<iframe src="https://raindrop.io/collection/8841871" 
-                    style="border:0px #ffffff none;" name="myiFrame" scrolling="no" 
+                    style="border:0px #ffffff none;" name="myiFrame" scrolling="yes" 
                     frameborder="1" marginheight="0px" marginwidth="0px" height="910px" 
                     width="100%" allowfullscreen></iframe>')
 
