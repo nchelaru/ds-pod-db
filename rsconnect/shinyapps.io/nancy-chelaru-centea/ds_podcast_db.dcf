@@ -5,9 +5,9 @@ account: nancy-chelaru-centea
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1473535
-bundleId: 2589926
+bundleId: 2602502
 url: https://nancy-chelaru-centea.shinyapps.io/ds_podcast_db/
-when: 1573757498.82135
+when: 1574218309.66569
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: podcast_tags_heatmap.Rmd

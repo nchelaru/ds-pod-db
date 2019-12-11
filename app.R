@@ -62,7 +62,8 @@ iframe_raindrop <- HTML('<iframe src="https://raindrop.io/collection/8841871"
 
 about_msg <- HTML('<p style="font-size:16px; margin: 0px 15px 5px 15px;">
                   When faced with a minor inconvenience, namely too many data science podcasts to keep up with, the answer is always "can I make an app
-                  for that?". And so this little dashboard is born! 
+                  for that?". And so this little dashboard is born! For more details on how this app is made, please check out this 
+                  <a href="http://nancychelaru.rbind.io/blogs/data-science-podcast-explorer/">post</a>!
                   
                   <br><br>
                   
@@ -95,15 +96,13 @@ ir_projects <- HTML('<p style="font-size:20px; margin: 0px 15px 5px 15px;">
                    on the left.
                   
                   <br><br>
-                  
-                  <center><a href="https://www.intelligencerefinery.io"><img src="full_logo.png" style="height:120px;"></a></center>
-                  <br>
                   </p>')
 
 footer_msg <- HTML('<div style="font-size:18px; margin: 0px 15px 5px 15px;"><center>I would love to hear any of your comments or suggestions! <i class="fas fa-smile"></i></center>
+                  <br><br>
                   <center><a href="mailto:nancy.chelaru@gmail.com"><i class="fas fa-envelope" style="padding:10px;"></i></a>
                   <a href="https://www.intelligencerefinery.io/contact/"><i class="fas fa-globe" style="padding:10px;"></i></i></a>
-                  <a href="https://github.com/nchelaru?tab=repositories"><i class="fab fa-github-alt" style="padding:10px;"></i></a>
+                  <a href="https://github.com/nchelaru/ds-pod-db"><i class="fab fa-github-alt" style="padding:10px;"></i></a>
                   <a href="https://twitter.com/n_chelaru"><i class="fab fa-twitter" style="padding:10px;"></i></a></center>
 
                   </div>')
@@ -166,21 +165,20 @@ body <- dashboardBody(tags$head(tags$style(
                      status = "warning",
                      width = 12,
                      userPost(
-                       id = 1, collapsible = FALSE,
-                       src =  "http://icons.iconarchive.com/icons/google/noto-emoji-activities/256/52707-party-popper-icon.png",
-                       author = h3("It's alive!"),
-                       description = "September 19, 2019",
-                       about_msg
-                       
-                     ),
-                     userPost(
                        id = 2, collapsible = FALSE,
                        src = "https://i.ibb.co/qkKGVBX/logo-clean.png",
                        author = h4('Add new links to "About" page [Update]'),
                        description = "November 13, 2019",
                        HTML('<p style="font-size:16px; margin: 0px 15px 5px 15px;">
                             Add contact links and bookmark collection of Intelligence Refinery projects to the "About" page.</p>')
-                   )
+                     ),
+                     userPost(
+                       id = 1, collapsible = FALSE,
+                       src =  "http://icons.iconarchive.com/icons/google/noto-emoji-activities/256/52707-party-popper-icon.png",
+                       author = h3("It's alive!"),
+                       description = "September 19, 2019",
+                       about_msg
+                     )
                    ),
                    br(),
                    box(
@@ -326,10 +324,10 @@ body <- dashboardBody(tags$head(tags$style(
           )),
   tabItem(tabName = "about",
           br(),
-          fluidRow(
-            column(width=8,
+          fluidPage(fluidRow(
+            column(width=7,
                    iframe_raindrop),
-            column(width=4,
+            column(width=5,
                    widgetUserBox(
                      title = "Nancy Chelaru",
                      subtitle = "Creator",
@@ -346,7 +344,7 @@ body <- dashboardBody(tags$head(tags$style(
                    )
                    )
             
-          ))
+          )))
 ))
 
 
@@ -487,8 +485,9 @@ server <- function(input, output) {
     filter = 'none',
     options = list(
       searching = TRUE,
-      pageLength = 15,
-      scrollX = TRUE
+      pageLength = 10,
+      scrollX = TRUE,
+      scrollY = TRUE
     ),
     rownames = FALSE
   )
